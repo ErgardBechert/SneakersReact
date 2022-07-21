@@ -1,68 +1,30 @@
 import React from "react";
-import s from './Content.module.scss'
+import s from './Drawer.module.scss'
+import CartItem from "./CartItem/CartItem";
 
-const Content = (props) =>{
+const Drawer = ({onClose, items = []}) =>{
+
+    let cardsElements = items.map ( c => <CartItem id={c.id} title={c.title} price={c.price} imageUrl={c.imageUrl}/> )
     return (
-        <div className={`__container ${s.content}`}>
-            <div className={s.header}>
-                <h1>Все кроссовки</h1>
-                <div className={s.search}>
-                    <img src="/img/search.png" alt="search"/>
-                    <input placeholder="Поиск..." type="text"/>
+        <div className={s.overlay}>
+            <div className={s.drawer}>
+                <h2>Корзина  <img onClick={onClose} src="/img/remove.svg" alt="remove"/></h2>
+                <div className={s.items}>
+                    {cardsElements}
+                </div>
+                <div className={s.totalBlock}>
+                    <ul >
+                        <li><span>Итого:</span>
+                            <div></div>
+                            <b>21 498 руб</b></li>
+                        <li><span>Налог 5%:</span>
+                            <div></div>
+                            <b>1074 руб</b></li>
+                    </ul>
+                    <button className="greenButton">Оформить заказ <img src="./img/arrow.svg" alt="Arrow"/></button>
                 </div>
             </div>
-
-            <div className={s.body}>
-                <div className={s.card}>
-                    <div className={s.favorite}>
-                        <img src="/img/heart-unliked.svg" alt="unliked"/>
-                    </div>
-                    <img src="/img/sneakers1.jpg" alt="sneakers"/>
-                    <p>Мужские Кроссовки Nike Blazer Mid Suede</p>
-                    <div  className={s.menu}>
-                        <div className={s.price}>
-                            <span>Цена:</span>
-                            <b>12 999руб</b>
-                        </div>
-                        <button><img src="/img/add.svg" alt="add"/></button>
-                    </div>
-                </div>
-                <div className={s.card}>
-                    <img src="/img/sneakers1.jpg" alt="sneakers"/>
-                    <p>Мужские Кроссовки Nike Blazer Mid Suede</p>
-                    <div  className={s.menu}>
-                        <div className={s.price}>
-                            <span>Цена:</span>
-                            <b>12 999руб</b>
-                        </div>
-                        <button><img src="/img/add.svg" alt="add"/></button>
-                    </div>
-                </div>
-                <div className={s.card}>
-                    <img src="/img/sneakers1.jpg" alt="sneakers"/>
-                    <p>Мужские Кроссовки Nike Blazer Mid Suede</p>
-                    <div  className={s.menu}>
-                        <div className={s.price}>
-                            <span>Цена:</span>
-                            <b>12 999руб</b>
-                        </div>
-                        <button><img src="/img/add.svg" alt="add"/></button>
-                    </div>
-                </div>
-                <div className={s.card}>
-                    <img src="/img/sneakers1.jpg" alt="sneakers"/>
-                    <p>Мужские Кроссовки Nike Blazer Mid Suede</p>
-                    <div  className={s.menu}>
-                        <div className={s.price}>
-                            <span>Цена:</span>
-                            <b>12 999руб</b>
-                        </div>
-                        <button><img src="/img/add.svg" alt="add"/></button>
-                    </div>
-                </div>
-            </div>
-
         </div>
     );
 }
-export default Content;
+export default Drawer;

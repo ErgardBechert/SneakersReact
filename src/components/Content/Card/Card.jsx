@@ -1,68 +1,39 @@
 import React from "react";
-import s from './Content.module.scss'
+import s from './Card.module.scss'
 
-const Content = (props) =>{
+function Card ({imageUrl, title , price , onPlus}) {
+
+    const [isAdded, setIsAdded] = React.useState(false)
+
+    const [isFavorite, setIsFavorite] = React.useState(false)
+
+    const onClickPlus = () =>{
+        onPlus({title, imageUrl, price});
+        setIsAdded(!isAdded);
+    };
+
+    let onFavorite  = () => {
+        setIsFavorite(!isFavorite);
+    }
+
     return (
-        <div className={`__container ${s.content}`}>
-            <div className={s.header}>
-                <h1>Все кроссовки</h1>
-                <div className={s.search}>
-                    <img src="/img/search.png" alt="search"/>
-                    <input placeholder="Поиск..." type="text"/>
-                </div>
+        <div className={s.card}>
+            <div className={s.favorite} >
+                <img onClick={onFavorite} src={isFavorite ? '/img/btn-heart-liked.svg' : '/img/btn-heart-unliked.svg'} alt="unliked"/>
             </div>
+            <img src={imageUrl} alt="sneakers"/>
+            <p>{title}</p>
+            <div className={s.menu}>
+                <div className={s.price}>
+                    <span>Цена:</span>
+                    <b>{price}руб</b>
+                </div>
+                <div className={s.Add}>
+                    <img onClick={ onClickPlus } src={isAdded ? '/img/btn-checked.svg' : '/img/btn-plus.svg'} alt="add"/>
+                </div>
 
-            <div className={s.body}>
-                <div className={s.card}>
-                    <div className={s.favorite}>
-                        <img src="/img/heart-unliked.svg" alt="unliked"/>
-                    </div>
-                    <img src="/img/sneakers1.jpg" alt="sneakers"/>
-                    <p>Мужские Кроссовки Nike Blazer Mid Suede</p>
-                    <div  className={s.menu}>
-                        <div className={s.price}>
-                            <span>Цена:</span>
-                            <b>12 999руб</b>
-                        </div>
-                        <button><img src="/img/add.svg" alt="add"/></button>
-                    </div>
-                </div>
-                <div className={s.card}>
-                    <img src="/img/sneakers1.jpg" alt="sneakers"/>
-                    <p>Мужские Кроссовки Nike Blazer Mid Suede</p>
-                    <div  className={s.menu}>
-                        <div className={s.price}>
-                            <span>Цена:</span>
-                            <b>12 999руб</b>
-                        </div>
-                        <button><img src="/img/add.svg" alt="add"/></button>
-                    </div>
-                </div>
-                <div className={s.card}>
-                    <img src="/img/sneakers1.jpg" alt="sneakers"/>
-                    <p>Мужские Кроссовки Nike Blazer Mid Suede</p>
-                    <div  className={s.menu}>
-                        <div className={s.price}>
-                            <span>Цена:</span>
-                            <b>12 999руб</b>
-                        </div>
-                        <button><img src="/img/add.svg" alt="add"/></button>
-                    </div>
-                </div>
-                <div className={s.card}>
-                    <img src="/img/sneakers1.jpg" alt="sneakers"/>
-                    <p>Мужские Кроссовки Nike Blazer Mid Suede</p>
-                    <div  className={s.menu}>
-                        <div className={s.price}>
-                            <span>Цена:</span>
-                            <b>12 999руб</b>
-                        </div>
-                        <button><img src="/img/add.svg" alt="add"/></button>
-                    </div>
-                </div>
             </div>
-
         </div>
     );
 }
-export default Content;
+export default Card;
